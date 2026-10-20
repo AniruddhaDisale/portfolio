@@ -46,11 +46,11 @@ export default function App() {
     setTimeout(() => setCodeCopied(false), 2000);
   };
 
-  // Pricing calculations
+  // Pricing calculations - super accessible freelance rates
   const scopePrices = {
-    script: { name: 'Quick Automation Script', base: 15, time: '12-24h' },
-    feature: { name: 'Feature Module / Pipeline', base: 45, time: '24-48h' },
-    app: { name: 'Complete Application / Tool', base: 95, time: '3-4 Days' }
+    script: { name: 'Quick Automation Script', base: 10, time: '12-24h' },
+    feature: { name: 'Feature Module / Pipeline', base: 29, time: '24-48h' },
+    app: { name: 'Complete Application / Tool', base: 69, time: '2-3 Days' }
   };
 
   const estimatedTotal = scopePrices[calcScope].base + 
@@ -534,19 +534,19 @@ export async function annotateDocument(pdfBytes: Uint8Array, annotations: any[])
                     className={`pill-option ${calcScope === 'script' ? 'active' : ''}`}
                     onClick={() => setCalcScope('script')}
                   >
-                    Quick Script ($15)
+                    Quick Script ($10)
                   </button>
                   <button 
                     className={`pill-option ${calcScope === 'feature' ? 'active' : ''}`}
                     onClick={() => setCalcScope('feature')}
                   >
-                    Feature Module ($45)
+                    Feature Module ($29)
                   </button>
                   <button 
                     className={`pill-option ${calcScope === 'app' ? 'active' : ''}`}
                     onClick={() => setCalcScope('app')}
                   >
-                    Complete App / Tool ($95)
+                    Complete App / Tool ($69)
                   </button>
                 </div>
               </div>
@@ -596,7 +596,7 @@ export async function annotateDocument(pdfBytes: Uint8Array, annotations: any[])
 
                 <div className="pricing-price-wrap">
                   <span className="price-currency">$</span>
-                  <span className="price-amount">15</span>
+                  <span className="price-amount">10</span>
                 </div>
                 <div className="price-speed">⚡ 12-24 Hour Turnaround</div>
 
@@ -609,11 +609,11 @@ export async function annotateDocument(pdfBytes: Uint8Array, annotations: any[])
               </div>
 
               <button 
-                onClick={() => handleOpenModal('Quick Script & Automation ($15)')}
+                onClick={() => handleOpenModal('Quick Script & Automation ($10)')}
                 className="btn btn-secondary" 
                 style={{ width: '100%' }}
               >
-                Inquire at $15
+                Inquire at $10
               </button>
             </div>
 
@@ -625,7 +625,7 @@ export async function annotateDocument(pdfBytes: Uint8Array, annotations: any[])
 
                 <div className="pricing-price-wrap">
                   <span className="price-currency">$</span>
-                  <span className="price-amount">45</span>
+                  <span className="price-amount">29</span>
                 </div>
                 <div className="price-speed">⚡ 24-48 Hour Delivery</div>
 
@@ -638,11 +638,11 @@ export async function annotateDocument(pdfBytes: Uint8Array, annotations: any[])
               </div>
 
               <button 
-                onClick={() => handleOpenModal('Feature Module / Pipeline ($45)')}
+                onClick={() => handleOpenModal('Feature Module / Pipeline ($29)')}
                 className="btn btn-primary" 
                 style={{ width: '100%' }}
               >
-                Inquire at $45
+                Inquire at $29
               </button>
             </div>
 
@@ -653,9 +653,9 @@ export async function annotateDocument(pdfBytes: Uint8Array, annotations: any[])
 
                 <div className="pricing-price-wrap">
                   <span className="price-currency">$</span>
-                  <span className="price-amount">95</span>
+                  <span className="price-amount">69</span>
                 </div>
-                <div className="price-speed">⚡ 3-4 Days Delivery</div>
+                <div className="price-speed">⚡ 2-3 Days Delivery</div>
 
                 <ul className="pricing-features">
                   <li>Responsive React or Android architecture</li>
@@ -666,11 +666,11 @@ export async function annotateDocument(pdfBytes: Uint8Array, annotations: any[])
               </div>
 
               <button 
-                onClick={() => handleOpenModal('Complete Custom Application ($95)')}
+                onClick={() => handleOpenModal('Complete Custom Application ($69)')}
                 className="btn btn-secondary" 
                 style={{ width: '100%' }}
               >
-                Inquire at $95
+                Inquire at $69
               </button>
             </div>
           </div>
