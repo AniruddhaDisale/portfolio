@@ -214,7 +214,7 @@ export async function annotateDocument(pdfBytes: Uint8Array, annotations: any[])
             <li><a href="#workbench" className="nav-link">Workbench</a></li>
             <li><a href="#work" className="nav-link">Projects</a></li>
             <li><a href="#services" className="nav-link">Services</a></li>
-            <li><a href="https://github.com/AniruddhaDisale" target="_blank" rel="noreferrer" className="nav-link">GitHub ↗</a></li>
+            <li><a href="https://github.com/AniruddhaDisale" target="_blank" rel="noopener noreferrer" className="nav-link">GitHub ↗</a></li>
           </ul>
 
           <div className="nav-actions">
@@ -448,7 +448,7 @@ export async function annotateDocument(pdfBytes: Uint8Array, annotations: any[])
                   <a 
                     href={p.github} 
                     target="_blank" 
-                    rel="noreferrer" 
+                    rel="noopener noreferrer" 
                     className="btn btn-secondary"
                     style={{ fontSize: '0.84rem', padding: '0.55rem 1rem' }}
                   >
@@ -610,7 +610,7 @@ export async function annotateDocument(pdfBytes: Uint8Array, annotations: any[])
               <a 
                 href="https://github.com/AniruddhaDisale" 
                 target="_blank" 
-                rel="noreferrer" 
+                rel="noopener noreferrer" 
                 className="btn btn-secondary"
                 style={{ flex: 1 }}
               >
@@ -636,11 +636,11 @@ export async function annotateDocument(pdfBytes: Uint8Array, annotations: any[])
           </div>
 
           <div style={{ display: 'flex', gap: '1.25rem', flexWrap: 'wrap' }}>
-            <a href="https://github.com/AniruddhaDisale" target="_blank" rel="noreferrer" className="nav-link">GitHub</a>
-            <a href="https://github.com/AniruddhaDisale/FarmTech_Guru" target="_blank" rel="noreferrer" className="nav-link">FarmTech Guru</a>
-            <a href="https://github.com/AniruddhaDisale/paperforge" target="_blank" rel="noreferrer" className="nav-link">PaperForge</a>
-            <a href="https://github.com/AniruddhaDisale/D-invoice" target="_blank" rel="noreferrer" className="nav-link">D-Invoice</a>
-            <a href="https://github.com/AniruddhaDisale/data-automation-demo" target="_blank" rel="noreferrer" className="nav-link">Data Pipeline</a>
+            <a href="https://github.com/AniruddhaDisale" target="_blank" rel="noopener noreferrer" className="nav-link">GitHub</a>
+            <a href="https://github.com/AniruddhaDisale/FarmTech_Guru" target="_blank" rel="noopener noreferrer" className="nav-link">FarmTech Guru</a>
+            <a href="https://github.com/AniruddhaDisale/paperforge" target="_blank" rel="noopener noreferrer" className="nav-link">PaperForge</a>
+            <a href="https://github.com/AniruddhaDisale/D-invoice" target="_blank" rel="noopener noreferrer" className="nav-link">D-Invoice</a>
+            <a href="https://github.com/AniruddhaDisale/data-automation-demo" target="_blank" rel="noopener noreferrer" className="nav-link">Data Pipeline</a>
           </div>
         </div>
       </footer>
