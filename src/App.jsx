@@ -1,12 +1,27 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 
+// Direct asset imports — bundled by Vite with 100% path safety on GitHub Pages
+import farmtechImg from './assets/farmtech_guru.jpg';
+import paperforgeImg from './assets/paperforge.jpg';
+import dataflowImg from './assets/dataflow.jpg';
+import dinvoiceImg from './assets/dinvoice.jpg';
+
 export default function App() {
+  const [theme, setTheme] = useState('light');
   const [activeFilter, setActiveFilter] = useState('all');
   const [activeWorkbenchTab, setActiveWorkbenchTab] = useState('farmtech');
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedService, setSelectedService] = useState(null);
   const [copied, setCopied] = useState(false);
+
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme);
+  }, [theme]);
+
+  const toggleTheme = () => {
+    setTheme(prev => prev === 'light' ? 'dark' : 'light');
+  };
 
   const handleOpenModal = (service = null) => {
     setSelectedService(service);
@@ -22,7 +37,7 @@ export default function App() {
   const workbenchDemos = {
     farmtech: {
       title: 'FarmTech Guru — Mobile Agro-Engine & Cloud Sync',
-      desc: 'Native Android application logic computing crop nutrient requirements, weather forecasts, and offline-first Firestore synchronization.',
+      desc: 'Native Android application logic computing crop nutrient requirements, weather diagnostics, and offline-first Firestore synchronization.',
       metrics: [
         { label: 'Platform', value: 'Android / Java' },
         { label: 'Database', value: 'Firebase Firestore' },
@@ -35,6 +50,7 @@ public class FertilizerEngine {
         double nitrogenPerAcre = crop.getRecommendedNitrogen();
         double phosphorusPerAcre = crop.getRecommendedPhosphorus();
         
+        // Exact chemical conversion to commercial fertilizer weights
         double totalUreaKg = (nitrogenPerAcre * landAcres) / 0.46;
         double totalDapKg = (phosphorusPerAcre * landAcres) / 0.46;
         
@@ -121,7 +137,7 @@ export async function annotateDocument(pdfBytes: Uint8Array, annotations: any[])
       title: 'FarmTech Guru — Smart Agriculture Mobile App',
       category: ['apps'],
       tags: ['Android', 'Java', 'Firebase Firestore', 'Weather API', 'App Dev'],
-      image: '/farmtech_guru.jpg',
+      image: farmtechImg,
       badge: 'Mobile Application',
       desc: 'Comprehensive mobile application built for agricultural decision-making. Features real-time weather forecasting, crop stage diagnostics, fertilizer dosage calculators, profitability modeling, and farm produce inventory tracking.',
       highlights: [
@@ -136,7 +152,7 @@ export async function annotateDocument(pdfBytes: Uint8Array, annotations: any[])
       title: 'PaperForge — Private In-Browser Document Studio',
       category: ['web', 'docs'],
       tags: ['React', 'Vite', 'Canvas API', 'pdf-lib', 'Word DOCX'],
-      image: '/paperforge.jpg',
+      image: paperforgeImg,
       badge: 'React & Vite',
       desc: 'Full-featured client-side PDF & Word document editor. Annotate with text, freehand canvas drawing, insert geometric shapes/images, and reorder pages with zero server latency or data leakage.',
       highlights: [
@@ -151,7 +167,7 @@ export async function annotateDocument(pdfBytes: Uint8Array, annotations: any[])
       title: 'DataFlow Enterprise Automation Pipeline',
       category: ['python', 'docs'],
       tags: ['Python', 'Pandas', 'OpenPyXL', 'Excel Automation'],
-      image: '/dataflow.jpg',
+      image: dataflowImg,
       badge: 'Python & Pandas',
       desc: 'High-speed Python pipeline engineered for automated recurring invoice ingestion. Repairs irregular dates, standardizes broken schemas, isolates anomalies, and compiles executive Excel workbooks with KPI summaries and native charts in seconds.',
       highlights: [
@@ -166,7 +182,7 @@ export async function annotateDocument(pdfBytes: Uint8Array, annotations: any[])
       title: 'D-Invoice — GST-Ready Web Invoicing App',
       category: ['web', 'docs'],
       tags: ['JavaScript', 'HTML5', 'CSS3', 'PDF Engine'],
-      image: '/dinvoice.jpg',
+      image: dinvoiceImg,
       badge: 'Web App & PDF',
       desc: 'Zero-overhead invoice generator built for small shops and merchants. Handles multi-item inventory calculation, automatic tax and discount computation, and instant print-ready branded PDF generation without server dependencies.',
       highlights: [
@@ -202,6 +218,14 @@ export async function annotateDocument(pdfBytes: Uint8Array, annotations: any[])
           </ul>
 
           <div className="nav-actions">
+            <button 
+              onClick={toggleTheme} 
+              className="theme-toggle-btn" 
+              title={theme === 'light' ? 'Switch to Dark Mode' : 'Switch to Light Studio'}
+              aria-label="Toggle Theme"
+            >
+              {theme === 'light' ? '🌙' : '☀️'}
+            </button>
             <div className="badge badge-status">
               <span className="badge-status-dot"></span>
               <span>Available for Hire</span>
@@ -217,17 +241,18 @@ export async function annotateDocument(pdfBytes: Uint8Array, annotations: any[])
       <header className="hero-section section">
         <div className="container">
           <div className="hero-badge-wrap animate-reveal">
-            <span className="badge" style={{ background: 'rgba(255, 255, 255, 0.04)', color: 'var(--text-secondary)' }}>
+            <span className="badge">
               Software Engineer · Application Development & Python Automation
             </span>
           </div>
 
           <h1 className="hero-title animate-reveal-delay-1">
-            Engineering robust applications, modern web tools & automated pipelines.
+            Engineering robust applications, modern web tools &amp;{' '}
+            <span className="hero-title-gradient">automated pipelines.</span>
           </h1>
 
           <p className="hero-subtitle animate-reveal-delay-2">
-            Specializing in full-stack mobile applications (Android/Java/Flutter), 
+            Specializing in full-stack mobile applications (Android/Java), 
             private client-side React tools (PaperForge), and high-throughput Python data workflows.
           </p>
 
@@ -236,7 +261,7 @@ export async function annotateDocument(pdfBytes: Uint8Array, annotations: any[])
               View Verified Projects
             </a>
             <a href="#workbench" className="btn btn-secondary">
-              Inspect Code & Architecture
+              Inspect Code &amp; Architecture
             </a>
             <button onClick={() => handleOpenModal()} className="btn btn-secondary">
               Get in Touch
@@ -246,14 +271,14 @@ export async function annotateDocument(pdfBytes: Uint8Array, annotations: any[])
           <div className="hero-stats-grid animate-reveal-delay-4">
             <div className="stat-card">
               <div className="stat-value">App Development</div>
-              <div className="stat-label">Mobile & Full-Stack Systems</div>
+              <div className="stat-label">Mobile &amp; Full-Stack Systems</div>
             </div>
             <div className="stat-card">
-              <div className="stat-value">Python & Pandas</div>
+              <div className="stat-value">Python &amp; Pandas</div>
               <div className="stat-label">High-Speed Data Pipelines</div>
             </div>
             <div className="stat-card">
-              <div className="stat-value">React & Vite</div>
+              <div className="stat-value">React &amp; Vite</div>
               <div className="stat-label">Client-Side Web Tools</div>
             </div>
             <div className="stat-card">
@@ -269,13 +294,13 @@ export async function annotateDocument(pdfBytes: Uint8Array, annotations: any[])
         <div className="container">
           <div className="section-header">
             <span className="section-label">Engineered Capabilities</span>
-            <h2 className="section-title">Technical Precision & Code Craft</h2>
+            <h2 className="section-title">Technical Precision &amp; Code Craft</h2>
             <p className="section-subtitle">
               Inspect sample logic, execution latency, and architectural decisions across my core toolchains.
             </p>
           </div>
 
-          <div className="workbench-card">
+          <div className="workbench-card surface-card">
             <div className="workbench-tabs">
               <button 
                 className={`workbench-tab-btn ${activeWorkbenchTab === 'farmtech' ? 'active' : ''}`}
@@ -287,7 +312,7 @@ export async function annotateDocument(pdfBytes: Uint8Array, annotations: any[])
                 className={`workbench-tab-btn ${activeWorkbenchTab === 'csv' ? 'active' : ''}`}
                 onClick={() => setActiveWorkbenchTab('csv')}
               >
-                Python ETL & Data Repair
+                Python ETL &amp; Data Repair
               </button>
               <button 
                 className={`workbench-tab-btn ${activeWorkbenchTab === 'pdf' ? 'active' : ''}`}
@@ -305,8 +330,10 @@ export async function annotateDocument(pdfBytes: Uint8Array, annotations: any[])
 
             <div className="workbench-grid">
               <div>
-                <h3 style={{ fontSize: '1.25rem', marginBottom: '0.5rem' }}>{currentWorkbench.title}</h3>
-                <p style={{ color: 'var(--text-secondary)', fontSize: '0.92rem', marginBottom: '1.25rem' }}>
+                <h3 style={{ fontSize: '1.35rem', fontWeight: 800, marginBottom: '0.5rem', color: 'var(--text-primary)' }}>
+                  {currentWorkbench.title}
+                </h3>
+                <p style={{ color: 'var(--text-secondary)', fontSize: '0.94rem', marginBottom: '1.25rem', lineHeight: 1.6 }}>
                   {currentWorkbench.desc}
                 </p>
 
@@ -331,7 +358,11 @@ export async function annotateDocument(pdfBytes: Uint8Array, annotations: any[])
 
               <div className="workbench-code-box">
                 <div className="code-header">
-                  <span>Architecture Sample</span>
+                  <div className="code-window-dots">
+                    <span className="code-window-dot dot-red"></span>
+                    <span className="code-window-dot dot-yellow"></span>
+                    <span className="code-window-dot dot-green"></span>
+                  </div>
                   <span>Java / Python / TypeScript</span>
                 </div>
                 <pre className="code-body">
@@ -348,7 +379,7 @@ export async function annotateDocument(pdfBytes: Uint8Array, annotations: any[])
         <div className="container">
           <div className="section-header">
             <span className="section-label">Featured Work</span>
-            <h2 className="section-title">Verified Software & Applications</h2>
+            <h2 className="section-title">Verified Software &amp; Applications</h2>
             <p className="section-subtitle">
               Native mobile apps, client-side web tools, and enterprise automation pipelines.
             </p>
@@ -365,7 +396,7 @@ export async function annotateDocument(pdfBytes: Uint8Array, annotations: any[])
               className={`filter-btn ${activeFilter === 'apps' ? 'active' : ''}`}
               onClick={() => setActiveFilter('apps')}
             >
-              Mobile & Application Dev
+              Mobile &amp; Application Dev
             </button>
             <button 
               className={`filter-btn ${activeFilter === 'web' ? 'active' : ''}`}
@@ -377,7 +408,7 @@ export async function annotateDocument(pdfBytes: Uint8Array, annotations: any[])
               className={`filter-btn ${activeFilter === 'python' ? 'active' : ''}`}
               onClick={() => setActiveFilter('python')}
             >
-              Python & Automation
+              Python &amp; Automation
             </button>
           </div>
 
@@ -386,7 +417,12 @@ export async function annotateDocument(pdfBytes: Uint8Array, annotations: any[])
               <div key={p.id} className="project-card surface-card">
                 <div>
                   <div className="project-preview-wrap">
-                    <img src={p.image} alt={p.title} className="project-preview-img" loading="lazy" />
+                    <img 
+                      src={p.image} 
+                      alt={p.title} 
+                      className="project-preview-img" 
+                      loading="lazy" 
+                    />
                     <div className="project-preview-overlay">
                       <span className="preview-badge">{p.badge}</span>
                     </div>
@@ -414,14 +450,14 @@ export async function annotateDocument(pdfBytes: Uint8Array, annotations: any[])
                     target="_blank" 
                     rel="noreferrer" 
                     className="btn btn-secondary"
-                    style={{ fontSize: '0.82rem', padding: '0.5rem 0.9rem' }}
+                    style={{ fontSize: '0.84rem', padding: '0.55rem 1rem' }}
                   >
                     View Source on GitHub ↗
                   </a>
                   <button 
                     onClick={() => handleOpenModal(p.title)}
                     className="btn btn-primary"
-                    style={{ fontSize: '0.82rem', padding: '0.5rem 0.9rem' }}
+                    style={{ fontSize: '0.84rem', padding: '0.55rem 1rem' }}
                   >
                     Inquire
                   </button>
@@ -446,7 +482,7 @@ export async function annotateDocument(pdfBytes: Uint8Array, annotations: any[])
           <div className="pricing-grid">
             <div className="pricing-card surface-card">
               <div>
-                <h3 className="pricing-name">Data Script & Automation</h3>
+                <h3 className="pricing-name">Data Script &amp; Automation</h3>
                 <p className="pricing-desc">Single-file or recurring schema transformation script.</p>
 
                 <div className="pricing-price-wrap">
@@ -456,7 +492,7 @@ export async function annotateDocument(pdfBytes: Uint8Array, annotations: any[])
                 <div className="price-speed">⚡ 24-Hour Turnaround</div>
 
                 <ul className="pricing-features">
-                  <li>Deduplication & date/ID normalization</li>
+                  <li>Deduplication &amp; date/ID normalization</li>
                   <li>Python script + 1-click executable runner</li>
                   <li>Edge-case validation suite</li>
                   <li>Documented execution instructions</li>
@@ -473,6 +509,7 @@ export async function annotateDocument(pdfBytes: Uint8Array, annotations: any[])
             </div>
 
             <div className="pricing-card surface-card featured">
+              <span className="popular-tag">Most Popular</span>
               <div>
                 <h3 className="pricing-name">Full Application Feature / Pipeline</h3>
                 <p className="pricing-desc">Web or mobile app modules, Firestore sync, or Excel pipelines.</p>
@@ -484,10 +521,10 @@ export async function annotateDocument(pdfBytes: Uint8Array, annotations: any[])
                 <div className="price-speed">⚡ 48-Hour Delivery</div>
 
                 <ul className="pricing-features">
-                  <li>Full feature implementation & API integration</li>
+                  <li>Full feature implementation &amp; API integration</li>
                   <li>Firebase / local cache offline architecture</li>
                   <li>Production-grade error resilience</li>
-                  <li>Video walkthrough & support warranty</li>
+                  <li>Video walkthrough &amp; support warranty</li>
                 </ul>
               </div>
 
@@ -537,25 +574,27 @@ export async function annotateDocument(pdfBytes: Uint8Array, annotations: any[])
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
             <button className="modal-close" onClick={() => setIsModalOpen(false)}>✕</button>
             
-            <h3 style={{ fontSize: '1.4rem', marginBottom: '0.4rem' }}>Start a Conversation</h3>
-            <p style={{ color: 'var(--text-secondary)', fontSize: '0.88rem', marginBottom: '1.5rem' }}>
+            <h3 style={{ fontSize: '1.45rem', fontWeight: 800, marginBottom: '0.4rem', color: 'var(--text-primary)' }}>
+              Start a Conversation
+            </h3>
+            <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', marginBottom: '1.5rem', lineHeight: 1.5 }}>
               {selectedService ? `Discussing: ${selectedService}` : 'Share a brief overview of your application or workflow requirements.'}
             </p>
 
-            <div style={{ background: '#09090b', padding: '1rem', borderRadius: '8px', border: '1px solid var(--border-hairline)', marginBottom: '1.5rem' }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.35rem' }}>
-                <span style={{ fontSize: '0.78rem', color: 'var(--text-tertiary)', fontFamily: 'var(--font-mono)' }}>
+            <div style={{ background: 'var(--bg-subtle)', padding: '1.1rem', borderRadius: '12px', border: '1px solid var(--border-hairline)', marginBottom: '1.5rem' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.4rem' }}>
+                <span style={{ fontSize: '0.76rem', color: 'var(--text-tertiary)', fontFamily: 'var(--font-mono)', fontWeight: 600 }}>
                   DIRECT EMAIL
                 </span>
                 <button 
                   onClick={handleCopyEmail}
                   className="btn btn-secondary" 
-                  style={{ padding: '0.25rem 0.6rem', fontSize: '0.75rem' }}
+                  style={{ padding: '0.25rem 0.65rem', fontSize: '0.78rem' }}
                 >
                   {copied ? '✓ Copied' : 'Copy'}
                 </button>
               </div>
-              <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.92rem', color: '#38bdf8' }}>
+              <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.95rem', fontWeight: 600, color: 'var(--accent-indigo)' }}>
                 disaleaniruddha@gmail.com
               </div>
             </div>
@@ -579,8 +618,8 @@ export async function annotateDocument(pdfBytes: Uint8Array, annotations: any[])
               </a>
             </div>
 
-            <p style={{ marginTop: '1.5rem', textAlign: 'center', fontSize: '0.78rem', color: 'var(--text-muted)' }}>
-              🔒 100% Confidential. All data and communications are strictly private.
+            <p style={{ marginTop: '1.5rem', textAlign: 'center', fontSize: '0.8rem', color: 'var(--text-muted)' }}>
+              🔒 100% Confidential. All client communications are strictly private.
             </p>
           </div>
         </div>
@@ -590,13 +629,13 @@ export async function annotateDocument(pdfBytes: Uint8Array, annotations: any[])
       <footer className="footer">
         <div className="container footer-content">
           <div>
-            <span style={{ fontWeight: 700, fontSize: '0.95rem' }}>venoumsk</span>
-            <span style={{ color: 'var(--text-tertiary)', marginLeft: '0.5rem', fontSize: '0.85rem' }}>
+            <span style={{ fontWeight: 800, fontSize: '1rem', color: 'var(--text-primary)' }}>venoumsk</span>
+            <span style={{ color: 'var(--text-tertiary)', marginLeft: '0.5rem', fontSize: '0.86rem' }}>
               © 2026 Aniruddha Disale
             </span>
           </div>
 
-          <div style={{ display: 'flex', gap: '1.25rem' }}>
+          <div style={{ display: 'flex', gap: '1.25rem', flexWrap: 'wrap' }}>
             <a href="https://github.com/AniruddhaDisale" target="_blank" rel="noreferrer" className="nav-link">GitHub</a>
             <a href="https://github.com/AniruddhaDisale/FarmTech_Guru" target="_blank" rel="noreferrer" className="nav-link">FarmTech Guru</a>
             <a href="https://github.com/AniruddhaDisale/paperforge" target="_blank" rel="noreferrer" className="nav-link">PaperForge</a>
