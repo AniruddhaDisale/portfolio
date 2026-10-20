@@ -1,5 +1,5 @@
-# robots.txt for https://aniruddhadisale.github.io/portfolio/
+# robots.txt for https://venoumsk.github.io/portfolio/
 User-agent: *
 Allow: /
 
-Sitemap: https://aniruddhadisale.github.io/portfolio/sitemap.xml
+Sitemap: https://venoumsk.github.io/portfolio/sitemap.xml
