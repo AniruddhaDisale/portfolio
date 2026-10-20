@@ -168,7 +168,7 @@ export async function annotateDocument(pdfBytes: Uint8Array, annotations: any[])
         'Multi-stage crop disease identification & advisory guides',
         'Accurate agrochemical dosage & farm profit calculators'
       ],
-      github: 'https://github.com/AniruddhaDisale/FarmTech_Guru'
+      github: 'https://github.com/venoumsk/FarmTech_Guru'
     },
     {
       id: 'paperforge',
@@ -183,7 +183,7 @@ export async function annotateDocument(pdfBytes: Uint8Array, annotations: any[])
         'Real-time vector canvas rendering & layer ordering',
         'Exports standard-compliant PDFs in < 150ms'
       ],
-      github: 'https://github.com/AniruddhaDisale/paperforge'
+      github: 'https://github.com/venoumsk/paperforge'
     },
     {
       id: 'dataflow',
@@ -198,7 +198,7 @@ export async function annotateDocument(pdfBytes: Uint8Array, annotations: any[])
         'Auto-generates executive summary KPI dashboard',
         '1-click runner (.bat) ready for non-technical staff'
       ],
-      github: 'https://github.com/AniruddhaDisale/data-automation-demo'
+      github: 'https://github.com/venoumsk/data-automation-demo'
     },
     {
       id: 'dinvoice',
@@ -213,7 +213,7 @@ export async function annotateDocument(pdfBytes: Uint8Array, annotations: any[])
         'Automatic tax calculation & item subtotaling',
         'Instant client-side PDF download & thermal print mode'
       ],
-      github: 'https://github.com/AniruddhaDisale/D-invoice'
+      github: 'https://github.com/venoumsk/D-invoice'
     }
   ];
 
@@ -237,7 +237,7 @@ export async function annotateDocument(pdfBytes: Uint8Array, annotations: any[])
             <li><a href="#workbench" className="nav-link">Workbench</a></li>
             <li><a href="#work" className="nav-link">Projects</a></li>
             <li><a href="#pricing" className="nav-link">Pricing</a></li>
-            <li><a href="https://github.com/AniruddhaDisale" target="_blank" rel="noopener noreferrer" className="nav-link">GitHub ↗</a></li>
+            <li><a href="https://github.com/venoumsk" target="_blank" rel="noopener noreferrer" className="nav-link">GitHub ↗</a></li>
           </ul>
 
           <div className="nav-actions">
@@ -717,7 +717,7 @@ export async function annotateDocument(pdfBytes: Uint8Array, annotations: any[])
                 Open Email Client ↗
               </a>
               <a 
-                href="https://github.com/AniruddhaDisale" 
+                href="https://github.com/venoumsk" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 className="btn btn-secondary"
@@ -745,11 +745,11 @@ export async function annotateDocument(pdfBytes: Uint8Array, annotations: any[])
           </div>
 
           <div style={{ display: 'flex', gap: '1.25rem', flexWrap: 'wrap' }}>
-            <a href="https://github.com/AniruddhaDisale" target="_blank" rel="noopener noreferrer" className="nav-link">GitHub</a>
-            <a href="https://github.com/AniruddhaDisale/FarmTech_Guru" target="_blank" rel="noopener noreferrer" className="nav-link">FarmTech Guru</a>
-            <a href="https://github.com/AniruddhaDisale/paperforge" target="_blank" rel="noopener noreferrer" className="nav-link">PaperForge</a>
-            <a href="https://github.com/AniruddhaDisale/D-invoice" target="_blank" rel="noopener noreferrer" className="nav-link">D-Invoice</a>
-            <a href="https://github.com/AniruddhaDisale/data-automation-demo" target="_blank" rel="noopener noreferrer" className="nav-link">Data Pipeline</a>
+            <a href="https://github.com/venoumsk" target="_blank" rel="noopener noreferrer" className="nav-link">GitHub</a>
+            <a href="https://github.com/venoumsk/FarmTech_Guru" target="_blank" rel="noopener noreferrer" className="nav-link">FarmTech Guru</a>
+            <a href="https://github.com/venoumsk/paperforge" target="_blank" rel="noopener noreferrer" className="nav-link">PaperForge</a>
+            <a href="https://github.com/venoumsk/D-invoice" target="_blank" rel="noopener noreferrer" className="nav-link">D-Invoice</a>
+            <a href="https://github.com/venoumsk/data-automation-demo" target="_blank" rel="noopener noreferrer" className="nav-link">Data Pipeline</a>
           </div>
         </div>
       </footer>
