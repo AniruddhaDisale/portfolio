@@ -14,6 +14,12 @@ export default function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedService, setSelectedService] = useState(null);
   const [copied, setCopied] = useState(false);
+  const [codeCopied, setCodeCopied] = useState(false);
+
+  // Interactive Project Cost Estimator state
+  const [calcScope, setCalcScope] = useState('feature');
+  const [calcSpeed, setCalcSpeed] = useState('standard');
+  const [calcVideo, setCalcVideo] = useState(false);
 
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
@@ -33,6 +39,23 @@ export default function App() {
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
+
+  const handleCopyCode = (codeText) => {
+    navigator.clipboard.writeText(codeText);
+    setCodeCopied(true);
+    setTimeout(() => setCodeCopied(false), 2000);
+  };
+
+  // Pricing calculations
+  const scopePrices = {
+    script: { name: 'Quick Automation Script', base: 15, time: '12-24h' },
+    feature: { name: 'Feature Module / Pipeline', base: 45, time: '24-48h' },
+    app: { name: 'Complete Application / Tool', base: 95, time: '3-4 Days' }
+  };
+
+  const estimatedTotal = scopePrices[calcScope].base + 
+    (calcSpeed === 'rush' ? 10 : 0) + 
+    (calcVideo ? 5 : 0);
 
   const workbenchDemos = {
     farmtech: {
@@ -213,7 +236,7 @@ export async function annotateDocument(pdfBytes: Uint8Array, annotations: any[])
           <ul className="nav-links">
             <li><a href="#workbench" className="nav-link">Workbench</a></li>
             <li><a href="#work" className="nav-link">Projects</a></li>
-            <li><a href="#services" className="nav-link">Services</a></li>
+            <li><a href="#pricing" className="nav-link">Pricing</a></li>
             <li><a href="https://github.com/AniruddhaDisale" target="_blank" rel="noopener noreferrer" className="nav-link">GitHub ↗</a></li>
           </ul>
 
@@ -239,10 +262,11 @@ export async function annotateDocument(pdfBytes: Uint8Array, annotations: any[])
 
       {/* Hero Section */}
       <header className="hero-section section">
+        <div className="hero-orb"></div>
         <div className="container">
           <div className="hero-badge-wrap animate-reveal">
             <span className="badge">
-              Software Engineer · Application Development & Python Automation
+              Software Engineer · Application Development &amp; Python Automation
             </span>
           </div>
 
@@ -328,12 +352,12 @@ export async function annotateDocument(pdfBytes: Uint8Array, annotations: any[])
               </button>
             </div>
 
-            <div className="workbench-grid">
-              <div>
-                <h3 style={{ fontSize: '1.35rem', fontWeight: 800, marginBottom: '0.5rem', color: 'var(--text-primary)' }}>
+            <div className="workbench-grid" key={activeWorkbenchTab}>
+              <div className="workbench-info-col animate-fade-in">
+                <h3 className="workbench-title">
                   {currentWorkbench.title}
                 </h3>
-                <p style={{ color: 'var(--text-secondary)', fontSize: '0.94rem', marginBottom: '1.25rem', lineHeight: 1.6 }}>
+                <p className="workbench-desc">
                   {currentWorkbench.desc}
                 </p>
 
@@ -356,14 +380,23 @@ export async function annotateDocument(pdfBytes: Uint8Array, annotations: any[])
                 </div>
               </div>
 
-              <div className="workbench-code-box">
+              <div className="workbench-code-box animate-fade-in">
                 <div className="code-header">
                   <div className="code-window-dots">
                     <span className="code-window-dot dot-red"></span>
                     <span className="code-window-dot dot-yellow"></span>
                     <span className="code-window-dot dot-green"></span>
                   </div>
-                  <span>Java / Python / TypeScript</span>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                    <span>Java / Python / TypeScript</span>
+                    <button 
+                      onClick={() => handleCopyCode(currentWorkbench.code)} 
+                      className="code-copy-btn"
+                      title="Copy code snippet"
+                    >
+                      {codeCopied ? '✓ Copied' : 'Copy'}
+                    </button>
+                  </div>
                 </div>
                 <pre className="code-body">
                   <code>{currentWorkbench.code}</code>
@@ -468,100 +501,176 @@ export async function annotateDocument(pdfBytes: Uint8Array, annotations: any[])
         </div>
       </section>
 
-      {/* Services & Clear Scope */}
-      <section id="services" className="section">
+      {/* Services & Affordable Pricing Section */}
+      <section id="pricing" className="section">
         <div className="container">
           <div className="section-header">
-            <span className="section-label">Services</span>
-            <h2 className="section-title">Transparent Fixed Scope</h2>
+            <span className="section-label">Accessible Freelance Rates</span>
+            <h2 className="section-title">Transparent &amp; Budget-Friendly Pricing</h2>
             <p className="section-subtitle">
-              Predictable delivery terms and milestone pricing for freelance contracts.
+              High-craft software without agency overhead. Predictable fixed-scope milestone terms with $0 hidden surprises.
             </p>
           </div>
 
+          {/* Interactive Cost Estimator Widget */}
+          <div className="estimator-card surface-card">
+            <div className="estimator-header">
+              <div>
+                <span className="estimator-tag">Interactive Estimator</span>
+                <h3 className="estimator-title">Instant Project Calculator</h3>
+              </div>
+              <div className="estimator-total-wrap">
+                <span className="estimator-total-label">Estimated Fixed Cost:</span>
+                <span className="estimator-total-price">${estimatedTotal}</span>
+                <span className="estimator-total-eta">⚡ {scopePrices[calcScope].time}</span>
+              </div>
+            </div>
+
+            <div className="estimator-controls">
+              <div className="estimator-group">
+                <label className="estimator-label">1. Choose Deliverable Scope:</label>
+                <div className="pill-selector">
+                  <button 
+                    className={`pill-option ${calcScope === 'script' ? 'active' : ''}`}
+                    onClick={() => setCalcScope('script')}
+                  >
+                    Quick Script ($15)
+                  </button>
+                  <button 
+                    className={`pill-option ${calcScope === 'feature' ? 'active' : ''}`}
+                    onClick={() => setCalcScope('feature')}
+                  >
+                    Feature Module ($45)
+                  </button>
+                  <button 
+                    className={`pill-option ${calcScope === 'app' ? 'active' : ''}`}
+                    onClick={() => setCalcScope('app')}
+                  >
+                    Complete App / Tool ($95)
+                  </button>
+                </div>
+              </div>
+
+              <div className="estimator-group">
+                <label className="estimator-label">2. Delivery Speed &amp; Options:</label>
+                <div className="pill-selector">
+                  <button 
+                    className={`pill-option ${calcSpeed === 'standard' ? 'active' : ''}`}
+                    onClick={() => setCalcSpeed('standard')}
+                  >
+                    Standard Pace (+ $0)
+                  </button>
+                  <button 
+                    className={`pill-option ${calcSpeed === 'rush' ? 'active' : ''}`}
+                    onClick={() => setCalcSpeed('rush')}
+                  >
+                    Priority Rush (+ $10)
+                  </button>
+                  <button 
+                    className={`pill-option ${calcVideo ? 'active' : ''}`}
+                    onClick={() => setCalcVideo(!calcVideo)}
+                  >
+                    Video Walkthrough (+ $5)
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div className="estimator-cta-wrap">
+              <button 
+                onClick={() => handleOpenModal(`Estimated: ${scopePrices[calcScope].name} ($${estimatedTotal})`)}
+                className="btn btn-primary"
+                style={{ width: '100%', padding: '0.85rem' }}
+              >
+                Inquire With This Estimate (${estimatedTotal}) →
+              </button>
+            </div>
+          </div>
+
+          {/* Pricing Grid */}
           <div className="pricing-grid">
             <div className="pricing-card surface-card">
               <div>
-                <h3 className="pricing-name">Data Script &amp; Automation</h3>
-                <p className="pricing-desc">Single-file or recurring schema transformation script.</p>
+                <h3 className="pricing-name">Quick Script &amp; Automation</h3>
+                <p className="pricing-desc">Single-file automation, CSV repair, or quick bug fix.</p>
 
                 <div className="pricing-price-wrap">
                   <span className="price-currency">$</span>
-                  <span className="price-amount">45</span>
+                  <span className="price-amount">15</span>
                 </div>
-                <div className="price-speed">⚡ 24-Hour Turnaround</div>
+                <div className="price-speed">⚡ 12-24 Hour Turnaround</div>
 
                 <ul className="pricing-features">
                   <li>Deduplication &amp; date/ID normalization</li>
                   <li>Python script + 1-click executable runner</li>
-                  <li>Edge-case validation suite</li>
-                  <li>Documented execution instructions</li>
+                  <li>Edge-case validation &amp; console logs</li>
+                  <li>Clear documented execution instructions</li>
                 </ul>
               </div>
 
               <button 
-                onClick={() => handleOpenModal('Data Script & Automation ($45)')}
+                onClick={() => handleOpenModal('Quick Script & Automation ($15)')}
                 className="btn btn-secondary" 
                 style={{ width: '100%' }}
               >
-                Inquire
+                Inquire at $15
               </button>
             </div>
 
             <div className="pricing-card surface-card featured">
               <span className="popular-tag">Most Popular</span>
               <div>
-                <h3 className="pricing-name">Full Application Feature / Pipeline</h3>
-                <p className="pricing-desc">Web or mobile app modules, Firestore sync, or Excel pipelines.</p>
+                <h3 className="pricing-name">Feature Module / Pipeline</h3>
+                <p className="pricing-desc">Mobile app screen, React component, or full Pandas ETL workflow.</p>
 
                 <div className="pricing-price-wrap">
                   <span className="price-currency">$</span>
-                  <span className="price-amount">140</span>
+                  <span className="price-amount">45</span>
                 </div>
-                <div className="price-speed">⚡ 48-Hour Delivery</div>
+                <div className="price-speed">⚡ 24-48 Hour Delivery</div>
 
                 <ul className="pricing-features">
-                  <li>Full feature implementation &amp; API integration</li>
-                  <li>Firebase / local cache offline architecture</li>
-                  <li>Production-grade error resilience</li>
-                  <li>Video walkthrough &amp; support warranty</li>
+                  <li>Native Android Studio or React Vite module</li>
+                  <li>Firebase Firestore offline sync or Excel charts</li>
+                  <li>Production-grade error handling &amp; tests</li>
+                  <li>Direct video walkthrough &amp; support warranty</li>
                 </ul>
               </div>
 
               <button 
-                onClick={() => handleOpenModal('Application Feature / Pipeline ($140)')}
+                onClick={() => handleOpenModal('Feature Module / Pipeline ($45)')}
                 className="btn btn-primary" 
                 style={{ width: '100%' }}
               >
-                Inquire
+                Inquire at $45
               </button>
             </div>
 
             <div className="pricing-card surface-card">
               <div>
-                <h3 className="pricing-name">Custom Application / Dashboard</h3>
-                <p className="pricing-desc">Standalone single-page tool or mobile application module.</p>
+                <h3 className="pricing-name">Complete Custom Tool / App</h3>
+                <p className="pricing-desc">Standalone client-side web application or native Android module.</p>
 
                 <div className="pricing-price-wrap">
                   <span className="price-currency">$</span>
-                  <span className="price-amount">290</span>
+                  <span className="price-amount">95</span>
                 </div>
-                <div className="price-speed">⚡ 3-5 Days Delivery</div>
+                <div className="price-speed">⚡ 3-4 Days Delivery</div>
 
                 <ul className="pricing-features">
-                  <li>Responsive React / Android architecture</li>
-                  <li>Client-side document tooling or data engine</li>
-                  <li>Zero ongoing hosting maintenance costs</li>
-                  <li>Free Netlify / Vercel deployment setup</li>
+                  <li>Responsive React or Android architecture</li>
+                  <li>Zero monthly hosting fees (static / client-side)</li>
+                  <li>Complete source code ownership &amp; clean git repo</li>
+                  <li>Free deployment setup &amp; maintenance handover</li>
                 </ul>
               </div>
 
               <button 
-                onClick={() => handleOpenModal('Custom Application ($290)')}
+                onClick={() => handleOpenModal('Complete Custom Application ($95)')}
                 className="btn btn-secondary" 
                 style={{ width: '100%' }}
               >
-                Inquire
+                Inquire at $95
               </button>
             </div>
           </div>
